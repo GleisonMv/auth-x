@@ -1,0 +1,43 @@
+{
+    "name": "auth-x",
+    "version": "0.0.1",
+    "description": "auth, permission, strategy plugin for fastify",
+    "scripts": {
+        "test": "node test.js",
+        "benchmark": "autocannon -c 100 -d 1 http://localhost:3000/",
+        "benchmark-auth": "autocannon -c 100 -d 40 http://localhost:3000/auth",
+        "benchmark-not-auth": "autocannon -c 100 -d 40 http://localhost:3000/not-auth",
+        "benchmark-permission": "autocannon -c 100 -d 1 http://localhost:3000/permission"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/GleisonMv/auth-x.git"
+    },
+    "keywords": [
+        "auth",
+        "speed",
+        "fast",
+        "security",
+        "fastify",
+        "strategy",
+        "permission",
+        "rules"
+    ],
+    "author": "Gleison M. Vasconcelos - @gleisonmv <web.gleisonmv@gmail.com>",
+    "main": "index.js",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/GleisonMv/auth-x/issues"
+    },
+    "homepage": "https://github.com/GleisonMv/auth-x#readme",
+    "files": [
+        "index.js",
+        "strategy.js"
+    ],
+    "dependencies": {
+        "fastify-plugin": "^1.5.0"
+    },
+    "devDependencies": {
+        "fastify": "^2.3.0"
+    }
+}
