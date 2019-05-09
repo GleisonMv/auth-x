@@ -74,10 +74,6 @@ fastify.listen(3000, err => {
 ```javascript
 const fastify = require("fastify")();
 
-/**
- * Registramos o fast-auth-x com a Estratégia Padrão 
- * (Não recomendado para produção), passe em option uma strategy main
- */
 fastify.register(require("fast-auth-x"), {
 
     /* Estratégias */
@@ -101,30 +97,18 @@ fastify.register(require("fast-auth-x"), {
     }
 })
 
-/**
- * Verifica se está autenticado
- */
 fastify.get("/secure", (request, reply) => fastify.authx.verify(request, reply, true, () => {
     reply.send({ message: "Hello World!" });
 }));
 
-/**
- * Não pode estar autenticado
- */
 fastify.get("/login", (request, reply) => fastify.authx.verify(request, reply, false, () => {
     reply.send({ message: "Hello World!" });
 }));
 
-/**
- * Verifica a permissão
- */
 fastify.get("/permission", (request, reply) => fastify.authx.permission(request, reply, "user.home", () => {
     reply.send({ message: "Hello World!" });
 }));
 
-/**
- * Inicia o servidor
- */
 fastify.listen(3000, err => {
     if (err)
     {
