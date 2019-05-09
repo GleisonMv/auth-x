@@ -85,35 +85,15 @@ fastify.register(require("fast-auth-x"), {
 
         /* Estratégia principal */
         main: {
-            
-            /**
-                * Função de reposta para o erro, caso não complete os requisitos da funções abaixo
-                *
-                * @param {*} request Requisição do fastify
-                * @param {*} reply fastify Reply
-                * @param {*} error erro
-                */
+        
             reply: function (request, reply, error) {
                 reply.send({ name: 'auth-x-error', error: error })
             },
 
-            /**
-               * Verifica se está Autenticado
-               *
-               * @param {*} request Requisição do fastify
-               * @param {*} callback Callback de resposta (Error, Boolean)
-               */
             verify: function (request, callback) {
                 callback(null, false)
             },
-
-            /**
-               * Verifica a permissão
-               *
-               * @param {*} request Requisição do fastify
-               * @param {*} permission Permissão
-               * @param {*} callback Callback de resposta (Error, Boolean)
-               */
+            
             permission: function (request, permission, callback) {
                 callback(null, false)
             }
