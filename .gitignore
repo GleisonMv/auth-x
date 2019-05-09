@@ -2,3 +2,6 @@
 /.nyc_output
 /coverage
 /package_lock.json
+/sample.bat
+/sample
+/.scannerwork

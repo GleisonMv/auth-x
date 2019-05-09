@@ -4,6 +4,7 @@ const fp = require('fastify-plugin')
 
 const decorate = {}
 const authx = module.exports = fp((fastify, opts, next) => {
+  if (opts === undefined) opts = {}
   authx.strategy = opts.strategy !== undefined ? opts.strategy : {}
   if (authx.strategy.main === undefined) authx.strategy.main = require('./strategy')
   fastify.decorate('authx', decorate)
