@@ -1,5 +1,5 @@
 {
-    "name": "auth-x",
+    "name": "fast-auth-x",
     "version": "0.0.1",
     "description": "auth, permission, strategy plugin for fastify",
     "scripts": {
@@ -15,7 +15,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/GleisonMv/auth-x.git"
+        "url": "git+https://github.com/GleisonMv/fast-auth-x.git"
     },
     "keywords": [
         "auth",
@@ -31,9 +31,9 @@
     "main": "index.js",
     "license": "MIT",
     "bugs": {
-        "url": "https://github.com/GleisonMv/auth-x/issues"
+        "url": "https://github.com/GleisonMv/fast-auth-x/issues"
     },
-    "homepage": "https://github.com/GleisonMv/auth-x#readme",
+    "homepage": "https://github.com/GleisonMv/fast-auth-x#readme",
     "files": [
         "index.js",
         "strategy.js"
