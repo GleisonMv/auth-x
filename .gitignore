@@ -1,7 +1,7 @@
 /node_modules
 /.nyc_output
 /coverage
-/package_lock.json
+/package-lock.json
 /sample.bat
 /sample
 /.scannerwork
