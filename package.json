@@ -7,11 +7,7 @@
         "test-ci": "tap ./test/test.js --cov --coverage-report=html",
         "lint": "standard --verbose | snazzy",
         "lint-fix": "standard --fix",
-        "lint-ci": "standard",
-        "benchmark": "autocannon -c 100 -d 1 http://localhost:3000/",
-        "benchmark-auth": "autocannon -c 100 -d 40 http://localhost:3000/auth",
-        "benchmark-not-auth": "autocannon -c 100 -d 40 http://localhost:3000/not-auth",
-        "benchmark-permission": "autocannon -c 100 -d 1 http://localhost:3000/permission"
+        "lint-ci": "standard"
     },
     "repository": {
         "type": "git",
