@@ -2,8 +2,47 @@
 
 [![Greenkeeper badge](https://badges.greenkeeper.io/GleisonMv/fast-auth-x.svg)](https://greenkeeper.io/)
 [![Build Status](https://travis-ci.com/GleisonMv/fast-auth-x.svg?branch=master)](https://travis-ci.com/GleisonMv/fast-auth-x)
-![npm](https://img.shields.io/npm/v/fast-auth-x.svg)
-[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=GleisonMv_fast-auth-x&metric=ncloc)](https://sonarcloud.io/dashboard?id=GleisonMv_fast-auth-x)
-[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=GleisonMv_fast-auth-x&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=GleisonMv_fast-auth-x)
-[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=GleisonMv_fast-auth-x&metric=security_rating)](https://sonarcloud.io/dashboard?id=GleisonMv_fast-auth-x)
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=GleisonMv_fast-auth-x&metric=alert_status)](https://sonarcloud.io/dashboard?id=GleisonMv_fast-auth-x)
+[![npm](https://img.shields.io/npm/v/fast-auth-x.svg)](https://www.npmjs.com/package/fast-auth-x)
+[![Coverage Status](https://coveralls.io/repos/github/GleisonMv/fast-auth-x/badge.svg?branch=master)](https://coveralls.io/github/GleisonMv/fast-auth-x?branch=master)
+
+
+### Usage
+```javascript
+const fastify = require('fastify')()
+
+class Strategy {
+  reply (request, reply, error) {
+    reply.send({ name: 'error', error: error })
+  }
+
+  verify (request, callback) {
+    callback(null, false)
+  }
+
+  permission (request, permission, callback) {
+    callback(null, false)
+  }
+}
+
+const authx = require('fast-auth-x')
+const auth = new authx({
+  strategy: {
+    name: new Strategy()
+  }
+})
+
+fastify.get('/auth', auth.verify(auth.strategy.name, true, (request, reply) => {
+  reply.send({ text: 'hello world' })
+}))
+
+fastify.get('/not-auth', auth.verify(auth.strategy.name, false, (request, reply) => {
+  reply.send({ text: 'hello world' })
+}))
+
+fastify.get('/permission', auth.permission(auth.strategy.name, 'user.info', (request, reply) => {
+  reply.send({ text: 'hello world' })
+}))
+
+fastify.listen(3000)
+
+```
