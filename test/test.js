@@ -22,10 +22,12 @@ const initialize = (verify, permission, callback, error, empty, errorpermission)
     };
 
     const fastify = Fastify()
+
+    let auth
     if (empty) {
-      fastify.register(require('./../lib/index'))
+      auth = new (require('./../lib/index'))()
     } else {
-      fastify.register(require('./../lib/index'), {
+      auth = new (require('./../lib/index'))({
         strategy: {
           main: new Strategy()
         }
@@ -35,78 +37,79 @@ const initialize = (verify, permission, callback, error, empty, errorpermission)
     t.tearDown(() => {
       fastify.close()
     })
+
     fastify.listen(0, err => {
       t.error(err)
       fastify.server.unref()
-      callback(t, fastify, fastify.strategy === undefined ? null : fastify.strategy.main)
+      callback(t, auth, auth.strategy === undefined ? null : auth.strategy.main)
     })
   }
 }
 
-test('test verify = false auth = false', initialize(true, false, (t, fastify, strategy) => {
-  fastify.auth.verify(strategy, false, () => {
+test('test verify = false auth = false', initialize(true, false, (t, auth, strategy) => {
+  auth.verify(strategy, false, () => {
     t.ok(true, 'verify callback')
     t.end()
   })(null, null)
 }))
 
-test('test verify = false auth = true', initialize(false, false, function (t, fastify, strategy) {
-  fastify.auth.verify(strategy, true, () => {
+test('test verify = false auth = true', initialize(false, false, function (t, auth, strategy) {
+  auth.verify(strategy, true, () => {
     t.ok(true, 'verify callback')
     t.end()
   })(null, null)
 }))
 
-test('test verify = true auth = true', initialize(true, false, function (t, fastify, strategy) {
-  fastify.auth.verify(strategy, true, () => {
+test('test verify = true auth = true', initialize(true, false, function (t, auth, strategy) {
+  auth.verify(strategy, true, () => {
     t.ok(true, 'verify callback')
     t.end()
   })(null, null)
 }))
 
-test('test permission: verify = false', initialize(false, false, function (t, fastify, strategy) {
-  fastify.auth.permission(strategy, 'user.test', () => {
+test('test permission: verify = false', initialize(false, false, function (t, auth, strategy) {
+  auth.permission(strategy, 'user.test', () => {
     t.ok(true, 'verify callback')
     t.end()
   })(null, null)
 }))
 
-test('test permission: verify = true, permission = false', initialize(true, false, function (t, fastify, strategy) {
-  fastify.auth.permission(strategy, 'user.test', () => {
+test('test permission: verify = true, permission = false', initialize(true, false, function (t, auth, strategy) {
+  auth.permission(strategy, 'user.test', () => {
     t.ok(true, 'verify callback')
     t.end()
   })(null, null)
 }))
 
-test('test permission: verify = true, permission = true', initialize(true, true, function (t, fastify, strategy) {
-  fastify.auth.permission(strategy, 'user.test', () => {
+test('test permission: verify = true, permission = true', initialize(true, true, function (t, auth, strategy) {
+  auth.permission(strategy, 'user.test', () => {
     t.ok(true, 'verify callback')
     t.end()
   })(null, null)
 }))
 
-test('test error permission 1', initialize(true, true, function (t, fastify, strategy) {
-  fastify.auth.permission(strategy, 'user.test', () => {
+test('test error permission 1', initialize(true, true, function (t, auth, strategy) {
+  auth.permission(strategy, 'user.test', () => {
     t.ok(true, 'verify callback')
     t.end()
   })(null, null)
 }, true, null))
 
-test('test error permission 2', initialize(true, true, function (t, fastify, strategy) {
-  fastify.auth.permission(strategy, 'user.test', () => {
+test('test error permission 2', initialize(true, true, function (t, auth, strategy) {
+  auth.permission(strategy, 'user.test', () => {
     t.ok(true, 'verify callback')
     t.end()
   })(null, null)
 }, null, null, true))
 
-test('test error verify', initialize(true, true, function (t, fastify, strategy) {
-  fastify.auth.verify(strategy, true, () => {
+test('test error verify', initialize(true, true, function (t, auth, strategy) {
+  auth.verify(strategy, true, () => {
     t.ok(true, 'verify callback')
     t.end()
   })(null, null)
 }, true, null))
 
-test('test empty', initialize(true, true, function (t, fastify, strategy) {
+test('test empty', initialize(true, true, function (t, auth, strategy) {
   t.ok(true, 'verify callback')
   t.end()
 }, true, true))
