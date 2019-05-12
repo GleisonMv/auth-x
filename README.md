@@ -46,3 +46,10 @@ fastify.get('/permission', auth.permission(auth.strategy.name, 'user.info', (req
 fastify.listen(3000)
 
 ```
+
+## Code of errors in reply
+1. Error Issued While Checking
+2. Unauthenticated error
+3. Error can not be authenticated
+4. Error Issued While Checking Permission
+5. No permission
