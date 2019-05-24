@@ -1,10 +1,10 @@
 {
     "name": "fast-auth-x",
-    "version": "1.0.2",
+    "version": "1.1.0",
     "description": "auth, permission, strategy plugin for fastify",
     "scripts": {
-        "test": "tap ./test/test.js",
-        "test-ci": "tap ./test/test.js --cov --coverage-report=html",
+        "test": "tap ./test/*.js",
+        "test-ci": "tap ./test/*.js --cov --coverage-report=html",
         "lint": "standard --verbose | snazzy",
         "lint-fix": "standard --fix",
         "lint-ci": "standard"
@@ -33,7 +33,9 @@
     "files": [
         "lib/*"
     ],
-    "dependencies": {},
+    "dependencies": {
+        "fastify-plugin": "^1.5.0"
+    },
     "devDependencies": {
         "fastify": "^2.3.0",
         "snazzy": "^8.0.0",
