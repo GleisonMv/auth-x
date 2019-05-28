@@ -5,44 +5,23 @@
 [![npm](https://img.shields.io/npm/v/fast-auth-x.svg)](https://www.npmjs.com/package/fast-auth-x)
 [![Coverage Status](https://coveralls.io/repos/github/GleisonMv/fast-auth-x/badge.svg?branch=master)](https://coveralls.io/github/GleisonMv/fast-auth-x?branch=master)
 
+* Authentication
+* Strategy
+* Permission
 
-### Usage
-```javascript
-const fastify = require('fastify')()
+## Compatible
 
-class Strategy {
-  reply (request, reply, error) {
-    reply.send({ name: 'error', error: error })
-  }
+[fastify](https://github.com/fastify/fastify)
 
-  verify (request, callback) {
-    callback(null, false)
-  }
-
-  permission (request, permission, callback) {
-    callback(null, false)
-  }
-}
-
-const authx = require('fast-auth-x')
-const auth = new authx({
-  strategy: {
-    name: new Strategy()
-  }
-})
-
-fastify.get('/auth', auth.verify(auth.strategy.name, true, (request, reply) => {
-  reply.send({ text: 'hello world' })
-}))
-
-fastify.get('/not-auth', auth.verify(auth.strategy.name, false, (request, reply) => {
-  reply.send({ text: 'hello world' })
-}))
-
-fastify.get('/permission', auth.permission(auth.strategy.name, 'user.info', (request, reply) => {
-  reply.send({ text: 'hello world' })
-}))
-
-fastify.listen(3000)
-
+## Installation
 ```
+npm i fast-auth-x
+```
+
+## Documentation
+
+[See the documentation](https://github.com/GleisonMv/fast-auth-x/wiki)
+
+## License
+
+[MIT](./LICENSE)
