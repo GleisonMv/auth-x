@@ -1,7 +1,8 @@
 {
     "name": "fast-auth-x",
-    "version": "1.1.1",
+    "version": "1.1.2",
     "description": "auth, permission, strategy plugin for fastify",
+    "typings": "types/fast-auth-x.d.ts",
     "scripts": {
         "test": "tap ./test/*.js",
         "test-ci": "tap ./test/*.js --cov --coverage-report=html",
@@ -31,7 +32,8 @@
     },
     "homepage": "https://github.com/GleisonMv/fast-auth-x#readme",
     "files": [
-        "lib/*"
+        "lib/*",
+        "types/fast-auth-x.d.ts"
     ],
     "dependencies": {
         "fastify-plugin": "^1.5.0"
