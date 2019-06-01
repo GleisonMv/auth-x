@@ -5,16 +5,16 @@ declare module 'fastify' {
 
     interface FastifyRequest<HttpRequest>
     {
-        authenticated(reply: fastify.FastifyReply<any>, auth: boolean, done: () => void);
-        permission(reply: fastify.FastifyReply<any>, permission: any, done: () => void);
+        authenticated(reply: fastify.FastifyReply<any>, auth: boolean, done: () => void):void;
+        permission(reply: fastify.FastifyReply<any>, permission: any, done: () => void):void;
     }
 }
 
 declare abstract class strategy
 {
-    abstract onError(request: any, reply: any, error: number);
-    abstract onPermissionCheck(request: any, done: (err: Error, auth?: boolean) => void);
-    abstract onUserCheck(request: any, permission: any, done: (err: Error, permission?: boolean) => void);
+    abstract onError(request: any, reply: any, error: number):void;
+    abstract onPermissionCheck(request: any, done: (err: Error, auth?: boolean) => void):void;
+    abstract onUserCheck(request: any, permission: any, done: (err: Error, permission?: boolean) => void):void;
 }
 
 declare const errors: {
